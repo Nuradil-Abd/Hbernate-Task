@@ -23,7 +23,7 @@ public class Post {
     private String image;
     private String description;
     private LocalDateTime created;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     @ToString.Exclude //todo стек-рейс
     private User user;

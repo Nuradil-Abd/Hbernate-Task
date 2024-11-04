@@ -27,22 +27,22 @@ public class App {
         CommentService commentService = new CommentServiceImpl();
 
 //
-//        User user = new User("Kira", "hkdgdsadgs@gmail.com", "123456");
-//
-//        userService.saveUser(user);
-//
-        Profile profile = new Profile();
-        profile.setBio("ui/ux");
-        profile.setDateOfBirth(LocalDate.of(2004, 1, 1));
-        profile.setFullName("Katar");
-        profile.setGender(Gender.FEMALE);
-//        profileService.save(user.getId(),profile);
-//
-//
+//        User user = new User("Kira", "mtedgs@gmail.com", "123456");
+////
+////        userService.saveUser(user);
+////
+//        Profile profile = new Profile();
+//        profile.setBio("ui/ux");
+//        profile.setDateOfBirth(LocalDate.of(2004, 1, 1));
+//        profile.setFullName("Katar");
+//        profile.setGender(Gender.FEMALE);
+////        profileService.save(user.getId(),profile);
+////
+////
 //        Post post = new Post();
 //        post.setDescription("Second comment");
-//        post.setUser(user);
-//        postService.savePost(post);
+//
+//        postService.savePost(12L,post);//todo user.getId() выдает инкремент
 //        Long postId = post.getId();
 //        System.out.println("Post id: " + postId);
 
@@ -51,7 +51,9 @@ public class App {
 //        Comment comment = new Comment();
 //        comment.setText("Exemple text");
 
-//        commentService.saveComment(14L, comment);
+//        commentService.saveComment(14L, comment);//todo user.getId() выдает инкремент
+
+        // find
 //
 //        System.out.println(profileService.findProfileById(12L));
 //
@@ -59,20 +61,26 @@ public class App {
 //
 //        System.out.println(commentService.findCommentByPostId(13L));
 
+        //update
+
 //        userService.updateUserProfile(18L,profile);
 
 //        commentService.updateComment(7L,"New text");
 
+        //search
+
 //        System.out.println(postService.searchPost("jaky"));
+
+        //delete
 //
 //        userService.deleteUser(11L);
 
 //        profileService.deleteProfileByUserId(28L);
 
 
-//        postService.deletePostById(16L);//todo при удалении post удаляются все ком и отвязка от пользователя
+//        postService.deletePostById(25L);//todo при удалении post удаляются все ком и отвязка от пользователя
 
-        commentService.deleteComment(6L);
+        commentService.deleteComment(2L);
 
 
     }

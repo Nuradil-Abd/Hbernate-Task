@@ -12,8 +12,8 @@ public class PostServiceImpl implements PostService {
     private final PostDao postDao = new PostDaoImpl();
 
     @Override
-    public void savePost(Post post) {
-        postDao.savePost(post);
+    public void savePost(Long userId,Post post) {
+        postDao.savePost(userId, post);
     }
 
     @Override

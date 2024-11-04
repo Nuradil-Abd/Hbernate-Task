@@ -30,7 +30,7 @@ public class User{
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.PERSIST)
     @ToString.Exclude //todo стек-рейс
     private List<Post> posts = new ArrayList<>();
 
