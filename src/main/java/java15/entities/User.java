@@ -35,9 +35,9 @@ public class User{
     private List<Post> posts = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL )
-    @JoinTable(name = "users_comments", joinColumns = @JoinColumn(name = "comment_id"),
-    inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<Comment> comments;
+    @JoinTable(name = "users_comments", joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "comment_id"))
+    private List<Comment> comments;
 
     public User(String username, String email, String password) {
         this.username = username;

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,5 +29,10 @@ public class Comment {
 
     @ManyToMany(mappedBy = "comments")
     @ToString.Exclude //todo стек-рейс
-    private Set<User> users;
+    private List<User> users;
+
+    @PrePersist
+    public void prePersist() {
+        this.commentDate = LocalDateTime.now();
+    }
 }

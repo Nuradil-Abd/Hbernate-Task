@@ -6,6 +6,7 @@ import java15.config.HibernateConfig;
 import java15.dao.CommentDao;
 import java15.entities.Comment;
 import java15.entities.Post;
+import java15.entities.User;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,12 +23,19 @@ public class CommentDaoImpl implements CommentDao {
 
         try {
             em.getTransaction().begin();
-
             Post post = em.find(Post.class, postId);
             if (post == null) {
                 throw new IllegalArgumentException("Post with ID " + postId + " not found.");
             }
             comment.setPost(post);
+
+            User user = post.getUser();
+            if(user == null) {
+                throw new IllegalArgumentException("User associated with the post not found..");
+            }
+
+         comment.setUsers(Collections.singletonList(user));
+            user.getComments().add(comment);
             em.persist(comment);
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -70,30 +78,27 @@ public class CommentDaoImpl implements CommentDao {
         }
     }
 
-    @Override
-    public void deleteComment(Long commentId) {
-        EntityManager em = HibernateConfig.getEntityManagerFactory().createEntityManager();
-        EntityTransaction tx = em.getTransaction();
+@Override
+public void deleteComment(Long commentId) {
+    try {
+        em.getTransaction().begin();
 
-        try{
-            tx =em.getTransaction();
-            tx.begin();
-
-            Comment comment = em.find(Comment.class, commentId);
-            if (comment != null) {
-                em.remove(comment);
-                System.out.println("Comment with ID " + commentId + " deleted.");
-            }else{
-                System.out.println("Comment with ID " + commentId + " not found.");
-            }
-            tx.commit();
-        }catch (Exception e){
-            if(tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        }finally {
-            em.close();
+        Comment comment = em.find(Comment.class, commentId);
+        if (comment == null) {
+            throw new IllegalArgumentException("Comment not found.");
         }
+
+        for (User user : comment.getUsers()) {
+            user.getComments().remove(comment);
+        }
+        em.remove(comment);
+        em.getTransaction().commit();
+    } catch (Exception e) {
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback();
+        }
+        e.printStackTrace();
     }
+}
+
 }

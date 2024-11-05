@@ -26,61 +26,62 @@ public class App {
         ProfileService profileService = new ProfileServiceImpl();
         CommentService commentService = new CommentServiceImpl();
 
-//
-//        User user = new User("Kira", "mtedgs@gmail.com", "123456");
 ////
-////        userService.saveUser(user);
+//        User user = new User("elaman", "elaman12343@gmail.com", "qwrerty");
 ////
-//        Profile profile = new Profile();
-//        profile.setBio("ui/ux");
-//        profile.setDateOfBirth(LocalDate.of(2004, 1, 1));
-//        profile.setFullName("Katar");
-//        profile.setGender(Gender.FEMALE);
-////        profileService.save(user.getId(),profile);
+//        userService.saveUser(user);
+////
+        Profile profile = new Profile();
+        profile.setBio("Kotlin");
+        profile.setDateOfBirth(LocalDate.of(2004, 1, 1));
+        profile.setFullName("Atai");
+        profile.setGender(Gender.FEMALE);
+//        profileService.save(user.getId(),profile);
 ////
 ////
 //        Post post = new Post();
-//        post.setDescription("Second comment");
-//
-//        postService.savePost(12L,post);//todo user.getId() выдает инкремент
+//        post.setDescription("Elaman comment");
+//////
+//        postService.savePost(34L,post);//todo user.getId() выдает инкремент
 //        Long postId = post.getId();
 //        System.out.println("Post id: " + postId);
-
-
 //
-//        Comment comment = new Comment();
-//        comment.setText("Exemple text");
+//
 
-//        commentService.saveComment(14L, comment);//todo user.getId() выдает инкремент
+        Comment comment = new Comment();
+        comment.setText("Atai Example");
+
+        commentService.saveComment(30L, comment);//todo user.getId() выдает инкремент
 
         // find
+//        System.out.println(userService.findUserById(3L));   ------
 //
-//        System.out.println(profileService.findProfileById(12L));
+//        System.out.println(profileService.findProfileById(3L));
 //
-//        System.out.println(postService.getPostByUserId(18L));
+//        System.out.println(postService.getPostByUserId(20L));   -------
 //
-//        System.out.println(commentService.findCommentByPostId(13L));
+//        System.out.println(commentService.findCommentByPostId(1L));   //--
 
         //update
 
-//        userService.updateUserProfile(18L,profile);
+//        userService.updateUserProfile(34L,profile);//todo решил проблему с обновлением изначально привязываю id к тому же id что и user
 
-//        commentService.updateComment(7L,"New text");
+//        commentService.updateComment(13L,"New text");
 
         //search
 
-//        System.out.println(postService.searchPost("jaky"));
+//        System.out.println(postService.searchPost("a"));
 
         //delete
 //
-//        userService.deleteUser(11L);
+//        userService.deleteUser(25L);
 
-//        profileService.deleteProfileByUserId(28L);
+//        profileService.deleteProfileByUserId(25L);
 
 
-//        postService.deletePostById(25L);//todo при удалении post удаляются все ком и отвязка от пользователя
+//        postService.deletePostById(26L);//todo при удалении post удаляются все ком и отвязка от пользователя
 
-        commentService.deleteComment(2L);
+//        commentService.deleteComment(18L);
 
 
     }

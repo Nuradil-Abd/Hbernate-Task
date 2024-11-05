@@ -3,6 +3,7 @@ package java15.dao.impl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
+import jakarta.transaction.Transactional;
 import java15.config.HibernateConfig;
 import java15.dao.UserDao;
 import java15.entities.Profile;
@@ -88,14 +89,15 @@ public class UserDaoImpl implements UserDao {
             throw new IllegalArgumentException("User with id " + userId + " does not exist.");
         }
 
-        Profile existingProfile = em.find(Profile.class, profile.getId());
+        Profile existingProfile = user.getProfile();
         if(existingProfile != null){
             existingProfile.setFullName(profile.getFullName());
+            existingProfile.setBio(profile.getBio());
             existingProfile.setDateOfBirth(profile.getDateOfBirth());
             existingProfile.setGender(profile.getGender());
-            existingProfile.setBio(profile.getBio());
-
+            em.merge(existingProfile);
         }else{
+            profile.setId(userId);
             profile.setUser(user);
             user.setProfile(profile);
             em.persist(profile);

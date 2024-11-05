@@ -12,21 +12,25 @@ public class ProfileDaoImpl implements ProfileDao {
 
     @Override
     public void saveProfile(Long userId, Profile profile) {
+        EntityTransaction tx = null;
         try {
-            em.getTransaction().begin();
+            tx = em.getTransaction();
+            tx.begin();
 
             User user = em.find(User.class, userId);
             if (user == null) {
                 System.out.println("User with id " + userId + " not found");
                 return;
             }
+            profile.setId(userId);
             user.setProfile(profile);
             em.persist(profile);
-            em.getTransaction().commit();
+            em.merge(user);
+            tx.commit();
             System.out.println("saved profile " + profile);
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
+            if (tx != null && em.getTransaction().isActive()) {
+                tx.rollback();
             }
             e.printStackTrace();
         }

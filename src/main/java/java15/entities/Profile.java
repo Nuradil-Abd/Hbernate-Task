@@ -16,8 +16,8 @@ import java.time.LocalDate;
 
 public class Profile {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "profile_seq")
-    private int id;
+
+    private Long id;
     private String fullName;
     private LocalDate dateOfBirth;
     @Enumerated(EnumType.STRING)
